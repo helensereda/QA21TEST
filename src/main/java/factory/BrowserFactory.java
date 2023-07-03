@@ -11,7 +11,6 @@ import utils.configuration.ReadProperties;
 public class BrowserFactory {
     private WebDriver driver = null;
     private DriverManagerType driverManagerType = null;
-
     public BrowserFactory() {
         switch (ReadProperties.browserName().toLowerCase()) {
             case "chrome" :

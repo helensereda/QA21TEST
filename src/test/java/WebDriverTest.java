@@ -4,7 +4,6 @@ import factory.SimpleDriver;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 public class WebDriverTest {
-
     @Test
     public void simpleWebDriverTest() throws InterruptedException {
         SimpleDriver simpleDriver = new SimpleDriver();

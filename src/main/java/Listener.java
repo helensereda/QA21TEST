@@ -6,5 +6,4 @@ public class Listener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         System.out.println("Make a screenshot!!!");
     }
-
 }

@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class AdvancedDriver {
-
     public WebDriver getDriver() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 

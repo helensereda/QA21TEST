@@ -15,7 +15,6 @@ import static java.lang.Thread.sleep;
 
 public class SmokeTest {
     protected WebDriver driver;
-
     @BeforeMethod
     public void setUp() {
         BrowserFactory browserFactory = new BrowserFactory(); //запуск браузера
