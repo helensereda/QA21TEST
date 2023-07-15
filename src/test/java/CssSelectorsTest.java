@@ -10,8 +10,6 @@ import utils.configuration.ReadProperties;
 public class CssSelectorsTest {
     protected WebDriver driver;
 
-
-
     @BeforeMethod
     public void setUp() {
         BrowserFactory browserFactory = new BrowserFactory();
