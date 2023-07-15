@@ -70,6 +70,7 @@ public class XpathLocatorsTest {
     public void axesXPathTest() {
         driver.get(ReadProperties.getUrl());
 
+
         // Поиск родителя у элемента с тэгом h1
         Assert.assertTrue(driver.findElement(By.xpath("//h1/..")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//h1/parent::div")).isDisplayed());
