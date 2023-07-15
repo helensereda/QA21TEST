@@ -19,7 +19,6 @@ public class SmokeTest_Homework {
         BrowserFactory browserFactory = new BrowserFactory();
         driver = browserFactory.getDriver();
     }
-
     @Test
     public void calculatorElectricTest() throws InterruptedException {
         driver.get("https://kermi-fko.ru/raschety/Calc-Rehau-Solelec.aspx");
@@ -30,7 +29,6 @@ public class SmokeTest_Homework {
         WebElement lenght = driver.findElement(By.id("el_f_lenght"));
         WebElement lostInput = driver.findElement(By.id("el_f_losses"));
         WebElement calcButton = driver.findElement(By.name("button"));
-
         widthInput.sendKeys("12");
         lenght.sendKeys("20");
 
