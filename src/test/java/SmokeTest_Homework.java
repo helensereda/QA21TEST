@@ -37,7 +37,6 @@ public class SmokeTest_Homework {
         SelectRoom.selectByIndex(1);
         Thread.sleep(2000);
 
-
         WebElement selectWebElement1 = driver.findElement(By.id ("heating_type"));
         Select SelectHeating = new Select(selectWebElement1);
         SelectHeating.selectByValue("2");
