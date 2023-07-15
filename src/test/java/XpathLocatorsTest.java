@@ -97,4 +97,5 @@ public class XpathLocatorsTest {
         Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/preceding-sibling::form")).isDisplayed());
     }
 
+
 }

@@ -22,6 +22,7 @@ public class BasicLocatorsTest {
         driver.quit();
     }
 
+
     @Test
     public void basicLocatorsTest_1() {
         driver.get(ReadProperties.getUrl());
