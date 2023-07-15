@@ -11,7 +11,6 @@ import org.testng.Assert;
 import java.util.List;
 public class BasicLocatorsTest {
     protected WebDriver driver;
-
     @BeforeMethod
     public void setUp() {
         BrowserFactory browserFactory = new BrowserFactory();
