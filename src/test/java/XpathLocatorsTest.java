@@ -24,9 +24,9 @@ public class XpathLocatorsTest {
     @Test
     public void basicXpathLocatorsTest() {
         driver.get(ReadProperties.getUrl());
-//
-//        // Абсолютный xpath
-//        Assert.assertTrue(driver.findElement(By.xpath("/html/body/div[4]/div/div[1]/div[1]/div/div[2]")).isDisplayed());
+
+        // Абсолютный xpath
+        Assert.assertTrue(driver.findElement(By.xpath("/html/body/div[4]/div/div[1]/div[1]/div/div[2]")).isDisplayed());
 
         // Все элементы на странице начина с HTML
         driver.findElements(By.xpath("//*"));
@@ -70,7 +70,6 @@ public class XpathLocatorsTest {
     public void axesXPathTest() {
         driver.get(ReadProperties.getUrl());
 
-
         // Поиск родителя у элемента с тэгом h1
         Assert.assertTrue(driver.findElement(By.xpath("//h1/..")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//h1/parent::div")).isDisplayed());
@@ -96,6 +95,5 @@ public class XpathLocatorsTest {
         //Использование preceding-sibling - Выбирает все узлы одного уровня до текущего узла
         Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/preceding-sibling::form")).isDisplayed());
     }
-
 
 }

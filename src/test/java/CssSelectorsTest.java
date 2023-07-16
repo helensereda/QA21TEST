@@ -16,12 +16,10 @@ public class CssSelectorsTest {
         driver = browserFactory.getDriver();
     }
 
-
     @AfterMethod
     public void tearDown() {
         driver.quit();
     }
-
     @Test
     public void cssSelectorsTest() {
 
