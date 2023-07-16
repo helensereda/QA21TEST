@@ -8,11 +8,13 @@ import org.testng.annotations.Test;
 import utils.configuration.ReadProperties;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class BasicLocatorsTest {
+public class BasicLocatorsTest {      //https://www.saucedemo.com/
     protected WebDriver driver;
+
     @BeforeMethod
     public void setUp() {
         BrowserFactory browserFactory = new BrowserFactory();
@@ -41,7 +43,7 @@ public class BasicLocatorsTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
 //        // Find webElement by LinkText
-//        driver.findElement(By.linkText("Forgot your password?")).click();
+//        driver.findElement(By.linkText("Forgot password?")).click();
 
         driver.findElement(By.tagName("div")).isDisplayed();
 

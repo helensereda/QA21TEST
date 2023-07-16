@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.configuration.ReadProperties;
 
-public class XpathLocatorsTest {
+public class XpathLocatorsTest {   //https://www.saucedemo.com/
     protected WebDriver driver;
 
     @BeforeMethod
@@ -68,33 +68,40 @@ public class XpathLocatorsTest {
 
     @Test
     public void axesXPathTest() {
-        driver.get(ReadProperties.getUrl());
+        driver.get("https://www.saucedemo.com/inventory.html");
+
+
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
 
 
         // Поиск родителя у элемента с тэгом h1
-        Assert.assertTrue(driver.findElement(By.xpath("//h1/..")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.xpath("//h1/parent::div")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.xpath("4")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//h4/parent::div")).isDisplayed());
 
         // Поиск всех предков с тэгом div у элемента с тэгом h1
-        Assert.assertTrue(driver.findElement(By.xpath("//h1/ancestor::div")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//h4/ancestor::div")).isDisplayed());
+
+        driver.findElement(By.id("login-button")).click();
 
         // Использование child - все дочерние элементы с тэго a от div
-        Assert.assertTrue(driver.findElement(By.xpath("//div/child::a")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div/child::span")).isDisplayed());
 
         // Использование child - все дочерние элементы с тэго a от div
-        Assert.assertTrue(driver.findElement(By.xpath("//div/descendant::a")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div/descendant::div")).isDisplayed());
 
         //Использование following - Выбирает всё в документе после закрытия тэга текущего узла
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/following::form")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='shopping_cart_container']/following::span")).isDisplayed());
 
         //Использование following-sibling - Выбирает все узлы одного уровня после текущего узла
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/following-sibling::form")).isDisplayed());
+        //Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/following-sibling::form")).isDisplayed());
 
         //Использование preceding- Выбирает все узлы, которые появляются перед текущим узлом в документе
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@class=\"dialog-title\"]/preceding::form")).isDisplayed());
+        //Assert.assertTrue(driver.findElement(By.xpath("//*[@class=\"dialog-title\"]/preceding::form")).isDisplayed());
 
         //Использование preceding-sibling - Выбирает все узлы одного уровня до текущего узла
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/preceding-sibling::form")).isDisplayed());
+        //Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/preceding-sibling::form")).isDisplayed());
     }
 
 
