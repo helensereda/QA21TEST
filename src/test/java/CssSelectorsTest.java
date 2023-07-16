@@ -25,7 +25,6 @@ public class CssSelectorsTest {
 
  driver.get("file:C://Users//elena.sereda//IdeaProjects//QA21TEST//src//test//resources//index.html");
 
-
         // Поиск по id
         Assert.assertTrue(driver.findElement(By.cssSelector("#my-Address")).isDisplayed());
         //   аналог
