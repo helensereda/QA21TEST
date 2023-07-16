@@ -26,16 +26,17 @@ public class XpathLocatorsTest {
         driver.get(ReadProperties.getUrl());
 
         // Абсолютный xpath
-        Assert.assertTrue(driver.findElement(By.xpath("/html/body/div[4]/div/div[1]/div[1]/div/div[2]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/div/form/div[2]/input")).isDisplayed());// это полный (full) путь, выбираем эл.- copy- copy full xpath
+
 
         // Все элементы на странице начина с HTML
         driver.findElements(By.xpath("//*"));
 
         // Аналог поиска по tagName
-        Assert.assertTrue(driver.findElement(By.xpath("//h1")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//h4")).isDisplayed());
 
         // Аналог родительского div и на один уровень ниже р1
-        Assert.assertTrue(driver.findElement(By.xpath("//div/h1")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div/h4")).isDisplayed());
 
         // Аналог родительского div и на любом уровене ниже div
         Assert.assertTrue(driver.findElement(By.xpath("//div//div")).isDisplayed());
@@ -44,26 +45,25 @@ public class XpathLocatorsTest {
         Assert.assertTrue(driver.findElement(By.xpath("//div[@id]")).isDisplayed());
 
         // Поиск элемента у которого есть аттрибут id cо значением top-logo
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@id = 'top-logo']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@id = 'login-button']")).isDisplayed());
 
         // Поиск элемента у которого есть аттрибут method cо значением и aттрибут target со значением
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@method='post' and @target='_blank']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@class='input_error form_input' and @placeholder='Username']")).isDisplayed());
 
-        // Поиск элемента у которого значение аттрибута начинается с
-        Assert.assertTrue(driver.findElement(By.xpath("//*[starts-with(@id, 'new')]")).isDisplayed());
+        // Поиск элемента у которого значение аттрибута начинается с starts-with, а дальше так
+        Assert.assertTrue(driver.findElement(By.xpath("//*[starts-with(@placeholder, 'Username')]")).isDisplayed());
 
-        // Поиск элемента у которого значение аттрибута содержит подстроку
-        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@id, 'Template')]")).isDisplayed());
+        // Поиск элемента у которого значение аттрибута содержит подстроку (contains)
+        Assert.assertTrue(driver.findElement(By.xpath("//*[contains(@placeholder, 'Username')]")).isDisplayed());
 
         // Поиск элемента у которого текстовое значение содержит равно
-        Assert.assertTrue(driver.findElement(By.xpath("//div[text() = 'All Projects']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.xpath("//*[. = 'Todos']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div[text() = 'Swag Labs']")).isDisplayed());
 
         // Поиск элемента у которого текстовое значение содержит подстроку
-        Assert.assertTrue(driver.findElement(By.xpath("//*[contains(text(), 'All Projects')]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//*[contains(text(), 'usernames are')]")).isDisplayed());
 
         // Поиск элемента по индексу
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class = 'summary-links text-secondary']/a[2]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div[2]")).isDisplayed());
     }
 
     @Test
