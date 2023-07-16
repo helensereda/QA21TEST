@@ -1,0 +1,949 @@
+Index: src/main/java/factory/SimpleDriver.java
+===================================================================
+diff --git a/src/main/java/factory/SimpleDriver.java b/src/main/java/factory/SimpleDriver.java
+deleted file mode 100644
+--- a/src/main/java/factory/SimpleDriver.java	(revision 126824a25b605999eb7f2302f296d087b1f30184)
++++ /dev/null	(revision 126824a25b605999eb7f2302f296d087b1f30184)
+@@ -1,14 +0,0 @@
+-package factory;
+-
+-import org.openqa.selenium.WebDriver;
+-import org.openqa.selenium.chrome.ChromeDriver;
+-
+-public class SimpleDriver {
+-
+-    public WebDriver getDriver() {
+-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+-
+-        return new ChromeDriver();
+-    }
+-}
+-
+Index: src/test/java/WebDriverTest.java
+===================================================================
+diff --git a/src/test/java/WebDriverTest.java b/src/test/java/WebDriverTest.java
+deleted file mode 100644
+--- a/src/test/java/WebDriverTest.java	(revision 126824a25b605999eb7f2302f296d087b1f30184)
++++ /dev/null	(revision 126824a25b605999eb7f2302f296d087b1f30184)
+@@ -1,31 +0,0 @@
+-import factory.AdvancedDriver;
+-import factory.BrowserFactory;
+-import factory.SimpleDriver;
+-import org.openqa.selenium.WebDriver;
+-import org.testng.annotations.Test;
+-public class WebDriverTest {
+-
+-    @Test
+-    public void simpleWebDriverTest() throws InterruptedException {
+-        SimpleDriver simpleDriver = new SimpleDriver();
+-        WebDriver driver = simpleDriver.getDriver();
+-        Thread.sleep(2000);
+-        driver.quit();
+-    }
+-
+-    @Test
+-    public void advancedWebDriverTest() throws InterruptedException {
+-        AdvancedDriver advancedDriver = new AdvancedDriver();
+-        WebDriver driver = advancedDriver.getDriver();
+-        Thread.sleep(2000);
+-        driver.quit();
+-    }
+-
+-    @Test
+-    public void browserFactoryTest() throws InterruptedException {
+-        BrowserFactory browserFactory = new BrowserFactory();
+-        WebDriver driver = browserFactory.getDriver();
+-        Thread.sleep(2000);
+-        driver.quit();
+-    }
+-}
+\ No newline at end of file
+Index: src/main/java/factory/AdvancedDriver.java
+===================================================================
+diff --git a/src/main/java/factory/AdvancedDriver.java b/src/main/java/factory/AdvancedDriver.java
+deleted file mode 100644
+--- a/src/main/java/factory/AdvancedDriver.java	(revision 126824a25b605999eb7f2302f296d087b1f30184)
++++ /dev/null	(revision 126824a25b605999eb7f2302f296d087b1f30184)
+@@ -1,28 +0,0 @@
+-package factory;
+-
+-import org.openqa.selenium.WebDriver;
+-import org.openqa.selenium.chrome.ChromeDriver;
+-import org.openqa.selenium.chrome.ChromeOptions;
+-
+-public class AdvancedDriver {
+-
+-    public WebDriver getDriver() {
+-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+-
+-        return new ChromeDriver(getOptions());
+-    }
+-
+-
+-    public ChromeOptions getOptions() {
+-        ChromeOptions chromeOptions = new ChromeOptions();
+-        chromeOptions.setHeadless(false);
+-        chromeOptions.addArguments("--disable-gpu");
+-        chromeOptions.addArguments("--ignore-certificate-errors");
+-        chromeOptions.addArguments("--silent");
+-        chromeOptions.addArguments("--start-maximized");
+-        chromeOptions.addArguments("--incognito");
+-
+-        return chromeOptions;
+-    }
+-}
+-
+Index: src/test/java/SmokeTest.java
+===================================================================
+diff --git a/src/test/java/SmokeTest.java b/src/test/java/SmokeTest.java
+deleted file mode 100644
+--- a/src/test/java/SmokeTest.java	(revision 126824a25b605999eb7f2302f296d087b1f30184)
++++ /dev/null	(revision 126824a25b605999eb7f2302f296d087b1f30184)
+@@ -1,85 +0,0 @@
+-import factory.BrowserFactory;
+-import org.openqa.selenium.By;
+-import org.openqa.selenium.Keys;
+-import org.openqa.selenium.WebDriver;
+-import org.openqa.selenium.WebElement;
+-import org.openqa.selenium.support.ui.Select;
+-import org.testng.Assert;
+-import org.testng.annotations.AfterMethod;
+-import org.testng.annotations.BeforeMethod;
+-import org.testng.annotations.Test;
+-
+-import java.util.List;
+-
+-import static java.lang.Thread.sleep;
+-
+-public class SmokeTest {
+-    protected WebDriver driver;
+-
+-    @BeforeMethod
+-    public void setUp() {
+-        BrowserFactory browserFactory = new BrowserFactory(); //запуск браузера
+-        driver = browserFactory.getDriver();
+-    }
+-
+-    @Test
+-    public void calculatorIKTTest() {
+-        driver.get("https://clinic-cvetkov.ru/company/kalkulyator-imt/");
+-        System.out.println(driver.getCurrentUrl());
+-        System.out.println(driver.getTitle());
+-
+-        WebElement weightInput = driver.findElement(By.name("weight"));
+-        WebElement heightInput = driver.findElement(By.name("height"));
+-        WebElement calcButton = driver.findElement(By.id("calc-mass-c"));
+-
+-        List<WebElement> buttonsList = driver.findElements(By.tagName("button")); // считаем количество элеменотов
+-        System.out.println(buttonsList.size());
+-
+-        heightInput.sendKeys("183");
+-        weightInput.sendKeys("58");
+-        calcButton.click();
+-
+-        WebElement result = driver.findElement(By.id("imt-result"));
+-
+-        Assert.assertEquals(result.getText(),
+-                "17.3 - Недостаточная (дефицит) масса тела");
+-    }
+-
+-    @Test
+-    public void validateSKFTest() throws InterruptedException {
+-        driver.get("https://13gp.by/%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8F/%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D0%BB%D1%8C%D0%BA%D1%83%D0%BB%D1%8F%D1%82%D0%BE%D1%80%D1%8B/%D1%80%D0%B0%D1%81%D1%87%D0%B5%D1%82-%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%81%D1%82%D0%B8-%D0%BA%D0%BB%D1%83%D0%B1%D0%BE%D1%87%D0%BA%D0%BE%D0%B2%D0%BE%D0%B9-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D1%86%D0%B8%D0%B8-%D1%81%D0%BA%D1%84");
+-
+-        WebElement selectWebElement = driver.findElement(By.id("oSex"));
+-        Select selectSex = new Select(selectWebElement);
+-
+-        selectSex.selectByIndex(1);
+-        Thread.sleep(2000);
+-
+-        selectSex.selectByValue("0");
+-        Thread.sleep(2000);
+-
+-        selectSex.selectByVisibleText("женский");
+-        sleep(2000);
+-
+-        driver.findElement(By.id("oCr")).sendKeys("80");
+-        driver.findElement(By.id("oAge")).sendKeys("38");
+-        driver.findElement(By.id("oWeight")).sendKeys("55");
+-        driver.findElement(By.id("oHeight")).sendKeys("163");
+-        driver.findElement(By.cssSelector("input[type='button']")).click();
+-
+-        Assert.assertEquals(driver.findElement(By.id("txtMDRD")).getText(),
+-                "MDRD: 74 (мл/мин/1,73кв.м)");
+-        Assert.assertEquals(driver.findElement(By.id("txtMDRD1")).getText(),
+-                "ХБП: 2 стадия (при наличии почечного повреждения)");
+-        Assert.assertEquals(driver.findElement(By.id("txtCG")).getText(),
+-                "Cockroft-Gault: 70 (мл/мин)");
+-        Assert.assertEquals(driver.findElement(By.id("txtBSA")).getText(),
+-                "Поверхность тела:1.58 (кв.м)");
+-
+-    }
+-
+-    @AfterMethod // закрытие браузера
+-    public void tearDown() {
+-        driver.quit();
+-    }
+-}
+\ No newline at end of file
+Index: src/test/resources/general.xml
+===================================================================
+diff --git a/src/test/resources/general.xml b/src/test/resources/general.xml
+deleted file mode 100644
+--- a/src/test/resources/general.xml	(revision 126824a25b605999eb7f2302f296d087b1f30184)
++++ /dev/null	(revision 126824a25b605999eb7f2302f296d087b1f30184)
+@@ -1,25 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8" ?>
+-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+-<suite name="Main Suite">
+-    <test name="Smoke">
+-        <classes>
+-            <class name="AUnitTest">
+-                <methods>
+-                    <include name="initTest_1"/>
+-                </methods>
+-            </class>
+-            <class name="CalcTest"/>
+-            <class name="DependencyTest"/>
+-        </classes>
+-    </test>
+-    <test name="Regression">
+-        <classes>
+-            <class name="PriorityTest"/>
+-            <class name="BUnitTest">
+-                <methods>
+-                    <exclude name="initTest_4"/>
+-                </methods>
+-            </class>
+-        </classes>
+-    </test>
+-</suite>
+\ No newline at end of file
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1688293947642)
++++ b/.idea/encodings.xml	(date 1688293947642)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/test/resources/config.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>url=https://aqa04onl01.testrail.io/\r\nbrowser=chrome\r\nheadless=false\r\ntimeout=10
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/src/test/resources/config.properties b/src/test/resources/config.properties
+--- a/src/test/resources/config.properties	(revision 126824a25b605999eb7f2302f296d087b1f30184)
++++ b/src/test/resources/config.properties	(date 1689310574425)
+@@ -1,4 +1,6 @@
+-url=https://aqa04onl01.testrail.io/
++url=http://aqa21onl01.testrail.io
+ browser=chrome
+ headless=false
++username=atrostyanko@gmail.com
++password=Qwertyu_1
+ timeout=10
+\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>org.example</groupId>\r\n    <artifactId>AQA21TEST</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n\r\n    <properties>\r\n        <maven.compiler.source>11</maven.compiler.source>\r\n        <maven.compiler.target>11</maven.compiler.target>\r\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\r\n    </properties>\r\n\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>org.testng</groupId>\r\n            <artifactId>testng</artifactId>\r\n            <version>7.8.0</version>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 126824a25b605999eb7f2302f296d087b1f30184)
++++ b/pom.xml	(date 1688387928287)
+@@ -12,6 +12,7 @@
+         <maven.compiler.source>11</maven.compiler.source>
+         <maven.compiler.target>11</maven.compiler.target>
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++
+     </properties>
+ 
+     <dependencies>
+@@ -20,6 +21,22 @@
+             <artifactId>testng</artifactId>
+             <version>7.8.0</version>
+         </dependency>
++
++        <dependency>
++            <groupId>org.seleniumhq.selenium</groupId>
++            <artifactId>selenium-java</artifactId>
++            <version>4.10.0</version>
++        </dependency>
++
++        <dependency>
++            <groupId>io.github.bonigarcia</groupId>
++            <artifactId>webdrivermanager</artifactId>
++            <version>5.4.0</version>
++        </dependency>
++
+     </dependencies>
+ 
+-</project>
+\ No newline at end of file
++
++</project>
++
++
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1688293947689)
++++ b/.idea/vcs.xml	(date 1688293947689)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/uiDesigner.xml b/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(date 1688293947702)
++++ b/.idea/uiDesigner.xml	(date 1688293947702)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/test/java/XpathLocatorsTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/XpathLocatorsTest.java b/src/test/java/XpathLocatorsTest.java
+new file mode 100644
+--- /dev/null	(date 1689314250699)
++++ b/src/test/java/XpathLocatorsTest.java	(date 1689314250699)
+@@ -0,0 +1,97 @@
++import factory.BrowserFactory;
++import org.openqa.selenium.By;
++import org.openqa.selenium.WebDriver;
++import org.testng.Assert;
++import org.testng.annotations.AfterMethod;
++import org.testng.annotations.BeforeMethod;
++import org.testng.annotations.Test;
++import utils.configuration.ReadProperties;
++
++public class XpathLocatorsTest {
++    protected WebDriver driver;
++
++    @BeforeMethod
++    public void setUp() {
++        BrowserFactory browserFactory = new BrowserFactory();
++        driver = browserFactory.getDriver();
++    }
++
++    @AfterMethod
++    public void tearDown() {
++        driver.quit();
++    }
++
++    @Test
++    public void basicXpathLocatorsTest() {
++        driver.get(ReadProperties.getUrl());
++
++        // Абсолютный xpath
++        Assert.assertTrue(driver.findElement(By.xpath("/html/body/div[4]/div/div[1]/div[1]/div/div[2]")).isDisplayed());
++
++        // Все элементы на странице начина с HTML
++        driver.findElements(By.xpath("//*"));
++
++        // Аналог поиска по tagName
++        Assert.assertTrue(driver.findElement(By.xpath("//h1")).isDisplayed());
++
++        // Аналог родительского div и на один уровень ниже р1
++        Assert.assertTrue(driver.findElement(By.xpath("//div/h1")).isDisplayed());
++
++        // Аналог родительского div и на любом уровене ниже div
++        Assert.assertTrue(driver.findElement(By.xpath("//div//div")).isDisplayed());
++
++        // Поиск элемента с тэгом div у которого есть аьттрибут id
++        Assert.assertTrue(driver.findElement(By.xpath("//div[@id]")).isDisplayed());
++
++        // Поиск элемента у которого есть аттрибут id cо значением top-logo
++        Assert.assertTrue(driver.findElement(By.xpath("//*[@id = 'top-logo']")).isDisplayed());
++
++        // Поиск элемента у которого есть аттрибут method cо значением и aттрибут target со значением
++        Assert.assertTrue(driver.findElement(By.xpath("//*[@method='post' and @target='_blank']")).isDisplayed());
++
++        // Поиск элемента у которого значение аттрибута начинается с
++        Assert.assertTrue(driver.findElement(By.xpath("//*[starts-with(@id, 'new')]")).isDisplayed());
++
++        // Поиск элемента у которого значение аттрибута содержит подстроку
++        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@id, 'Template')]")).isDisplayed());
++
++        // Поиск элемента у которого текстовое значение содержит равно
++        Assert.assertTrue(driver.findElement(By.xpath("//div[text() = 'All Projects']")).isDisplayed());
++        Assert.assertTrue(driver.findElement(By.xpath("//*[. = 'Todos']")).isDisplayed());
++
++        // Поиск элемента у которого текстовое значение содержит подстроку
++        Assert.assertTrue(driver.findElement(By.xpath("//*[contains(text(), 'All Projects')]")).isDisplayed());
++
++        // Поиск элемента по индексу
++        Assert.assertTrue(driver.findElement(By.xpath("//div[@class = 'summary-links text-secondary']/a[2]")).isDisplayed());
++    }
++
++    @Test
++    public void axesXPathTest() {
++        driver.get(ReadProperties.getUrl());
++
++        // Поиск родителя у элемента с тэгом h1
++        Assert.assertTrue(driver.findElement(By.xpath("//h1/..")).isDisplayed());
++        Assert.assertTrue(driver.findElement(By.xpath("//h1/parent::div")).isDisplayed());
++
++        // Поиск всех предков с тэгом div у элемента с тэгом h1
++        Assert.assertTrue(driver.findElement(By.xpath("//h1/ancestor::div")).isDisplayed());
++
++        // Использование child - все дочерние элементы с тэго a от div
++        Assert.assertTrue(driver.findElement(By.xpath("//div/child::a")).isDisplayed());
++
++        // Использование child - все дочерние элементы с тэго a от div
++        Assert.assertTrue(driver.findElement(By.xpath("//div/descendant::a")).isDisplayed());
++
++
++        //Использование following-sibling - Выбирает все узлы одного уровня после текущего узла
++        Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/following-sibling::form")).isDisplayed());
++
++        //Использование preceding- Выбирает все узлы, которые появляются перед текущим узлом в документе
++        Assert.assertTrue(driver.findElement(By.xpath("//*[@class=\"dialog-title\"]/preceding::form")).isDisplayed());
++
++        //Использование preceding-sibling - Выбирает все узлы одного уровня до текущего узла
++        Assert.assertTrue(driver.findElement(By.xpath("//*[@class='dialog-title']/preceding-sibling::form")).isDisplayed());
++    }
++}
++
+Index: src/test/resources/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/index.html b/src/test/resources/index.html
+new file mode 100644
+--- /dev/null	(date 1689274830733)
++++ b/src/test/resources/index.html	(date 1689274830733)
+@@ -0,0 +1,287 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Title</title>
++    <style>
++        body {
++            line-height:15px;
++        }
++
++        h1 {
++            line-height:34px;
++            margin-bottom:0px;
++            margin-top:10px;
++        }
++        #iframeResult
++        {
++            font-family:Arial;
++            border-radius:5px;
++        }
++        #iframeResult * :not(.noSel)
++        {
++            border:1px solid transparent;
++        }
++        #iframeResult span.markup
++        {
++            color:#aaaaaa;
++            font-size:12px;
++            font-family:Verdana, Geneva, Tahoma, sans-serif;
++            font-weight:normal;
++        }
++
++        #selectorOptions div {
++            font-family:"Courier New", Courier, monospace;
++            font-family:Verdana, Geneva, Tahoma, sans-serif;
++            font-size:14px;
++            line-height:16px;
++            cursor:pointer;
++        }
++        #selectorOptions div:hover {
++            background-color:#f1f1f1;
++        }
++        #content, #footer {
++            background-color:#f1f1f1;
++        }
++        #content {
++            border-top:none;
++        }
++        .headerText, #footer {
++            font-family:Arial, Helvetica, sans-serif;
++            font-size:16px;
++            color:#222222;
++        }
++        #selectorDescription {
++            padding:10px;
++            display:none;
++            width:225px;
++            background-color:#f1f1f1;
++            border:1px solid #d3d3d3;
++            border-radius:5px;
++            position:fixed;
++            top:150px;
++            left:230px;
++            text-align:center;
++            font-family:Verdana;
++            font-size:12px;
++        }
++        .smalldevice {
++            display:none;
++        }
++        @media screen and (max-width: 1160px)  {
++            .smalldevice {
++                display:inline;
++            }
++            .largedevice {
++                display:none;
++            }
++        }
++        @media screen and (max-width: 950px)  {
++            #selectorDescription {
++                left:200px;
++                width:150px;
++            }
++        }
++        @media only screen and (max-width: 768px) {
++            #textareaCode {
++                padding:5px;
++            }
++            .iframewrapper {
++                overflow: auto;
++            }
++            .container {
++                min-width:320px;
++            }
++            .textarea, .iframe {
++                height:97%;
++            }
++            .textareacontainer, .iframecontainer {
++                height:50%;
++                float:none;
++                width:98%;
++            }
++            .textarea, .iframe {
++                height:97%;
++                padding:15px;
++            }
++            .textareacontainer {
++                height:300px;
++            }
++
++            .container {
++                bottom:initial;
++                height:initial;
++                min-width:250px;
++            }
++            #selectorDescription {
++                width:40%;
++                position:absolute;
++                top:55px;
++                left:initial;
++                right:10%;
++            }
++        }
++        @media screen and (max-height: 700px) {
++            .footerText {
++                display:none;
++            }
++        }
++
++    </style>
++</head>
++<body>
++<div id="iframeResult" class="result_output" style="overflow: auto;">
++    <div id="selectorResult" style="padding:5px;" class="noSel">
++        <div class="noSel">
++            <h1 style=""><span class="markup">&lt;h1&gt;</span>Welcome to My Homepage<span
++                    class="markup">&lt;/h1&gt;</span></h1>
++
++            <div id="helpIntro" style="">
++                <span class="markup">&lt;div class="intro"&gt;</span>
++                <div class="intro">
++                    <p style="margin-top: 4px;"><span class="markup">&lt;p&gt;</span>My name is Donald <span
++                            id="Lastname" style=""><span class="markup">&lt;span id="Lastname"&gt;</span>Duck.<span
++                            class="markup">&lt;/span&gt;</span></span><span class="markup">&lt;/p&gt;</span></p>
++                    <p id="my-Address" style=""><span class="markup">&lt;p id="my-Address"&gt;</span>I live in
++                        Duckburg<span class="markup">&lt;/p&gt;</span></p>
++                    <p style="margin-bottom: 4px;"><span class="markup">&lt;p&gt;</span>I have many friends:<span
++                            class="markup">&lt;/p&gt;</span></p>
++                </div>
++                <span class="markup">&lt;/div&gt;</span>
++            </div>
++
++            <br>
++            <div class="helpUl">
++                <span class="markup">&lt;ul id="Listfriends&gt;</span>
++                <ul id="Listfriends" style="margin-top:0px;margin-bottom:0px;">
++
++                    <li style=""><span class="markup">&lt;li&gt;</span>Goofy<span class="markup">&lt;/li&gt;</span></li>
++                    <li style=""><span class="markup">&lt;li&gt;</span>Mickey<span class="markup">&lt;/li&gt;</span>
++                    </li>
++                    <li style=""><span class="markup">&lt;li&gt;</span>Daisy<span class="markup">&lt;/li&gt;</span></li>
++                    <li style=""><span class="markup">&lt;li&gt;</span>Pluto<span class="markup">&lt;/li&gt;</span></li>
++                </ul>
++                <span class="markup">&lt;/ul&gt;</span>
++            </div>
++
++            <ul style="display:none;"></ul>
++            <p class="myquote" style=""><span class="markup">&lt;p class="myquote"&gt;</span>All my friends are
++                great!<span class="markup">&lt;br&gt;</span><br>But I really like Daisy!!<span
++                        class="markup">&lt;/p&gt;</span></p>
++
++            <p lang="it" title="Hello beautiful" style=""><span class="markup">&lt;p lang="it" title="Hello beautiful"&gt;</span>Ciao
++                bella<span class="markup">&lt;/p&gt;</span></p>
++
++
++            <h3><span class="markup">&lt;h3&gt;</span>We are all animals!<span class="markup">&lt;/h3&gt;</span></h3>
++
++            <p style=""><span class="markup">&lt;p&gt;</span><span><b
++                    style="border-color: rgb(255, 102, 102); background-color: rgb(255, 255, 153);"><span
++                    class="markup">&lt;b&gt;</span>My latest discoveries have led me to believe that we are all animals:<span
++                    class="markup">&lt;/b&gt;</span></b></span><span class="markup">&lt;/p&gt;</span></p>
++
++            <div class="helpTable" style="width:220px;">
++                <span class="markup">&lt;table&gt;</span>
++                <ul style="display:none;"></ul>
++
++                <table cellpadding="2" cellspacing="2">
++                    <tbody>
++                    <tr style="background-color: rgb(241, 241, 241);">
++                        <th style="">Name</th>
++                        <th style="">Type of Animal</th>
++                    </tr>
++                    <tr style="background-color: rgb(241, 241, 241);">
++                        <td style="">Mickey</td>
++                        <td style="">Mouse</td>
++                    </tr>
++                    <tr style="background-color: rgb(241, 241, 241);">
++                        <td style="">Goofey</td>
++                        <td style="">Dog</td>
++                    </tr>
++                    <tr style="background-color: rgb(241, 241, 241);">
++                        <td style="">Daisy</td>
++                        <td style="">Duck</td>
++                    </tr>
++                    <tr style="background-color: rgb(241, 241, 241);">
++                        <td style="">Pluto</td>
++                        <td style="">Dog</td>
++                    </tr>
++                    </tbody>
++                </table>
++                <span class="markup">&lt;/table&gt;</span>
++            </div>
++
++            <div class="noSel newsletter" style="background-color:#99D6FF;border:1px solid #0099FF;padding:10px;">
++                <form>
++                    <h4>Subscribe to my newsletter:</h4>
++                    <div style="overflow:auto;">
++                        <div style="width:100px;float:left;">Name:</div>
++                        <div style="width:180px;float:left;"><input type="text" style="width:150px" class="markup">
++                        </div>
++                    </div>
++                    <div style="overflow:auto;">
++                        <div style="width:100px;float:left;">E-mail:</div>
++                        <div style="width:180px;float:left;"><input type="email" style="width:150px" class="markup"
++                                                                    onchange="changeEmail(this)"></div>
++                    </div>
++                    <!--
++                      <div style="width:65px;float:left;">Password:</div><div style="width:180px;float:left;"><input type="password" style="width:150px" name="password" value="password" /></div>
++                      <div class="noSel" style="clear:both;"></div>
++                    -->
++                    <div class="noSel" style="margin-top:10px;">
++                        Female: <input name="rr" type="radio" id="rr1" checked="checked"
++                                       style="outline:2px solid transparent">
++                        Male: <input name="rr" type="radio" id="rr2" style="outline:2px solid transparent">
++                        Other: <input name="rr" type="radio" id="rr3" disabled="disabled"
++                                      style="outline:2px solid transparent">
++                    </div>
++                    <h4>Newscategories:</h4>
++                    <div style="overflow:auto;">
++                        <div style="width:60px;float:left;">Ducks:</div>
++                        <div style="width:20px;float:left;"><input id="cc1" type="checkbox" checked="checked"
++                                                                   style="outline:2px solid transparent"></div>
++                    </div>
++                    <div style="overflow:auto;">
++                        <div style="width:60px;float:left;">Dogs:</div>
++                        <div style="width:20px;float:left;"><input id="cc2" type="checkbox"
++                                                                   style="outline:2px solid transparent"></div>
++                    </div>
++                    <div style="overflow:auto;">
++                        <div style="width:60px;float:left;">Humans:</div>
++                        <div style="width:20px;float:left;"><input id="cc3" type="checkbox"
++                                                                   style="outline:2px solid transparent"></div>
++                    </div>
++                    <div class="noSel" style="clear:both;"></div>
++                    <p class="noSel">Your lucky number (between 1 and 10): <input type="number" min="1" max="10"
++                                                                                  value="7"
++                                                                                  onchange="changeLuckyNumber(this)">
++                    </p>
++                    <!--
++                     <input class="noSel" type="reset" value="Reset" style="outline:2px solid transparent" />
++                     <input class="noSel" type="submit" value="Submit" style="outline:2px solid transparent" />
++                     <input class="noSel" type="button" value="Cancel" style="outline:2px solid transparent" />
++                     <div style="margin-top:10px;">
++                      <div style="width:120px;float:left;text-align:center;">
++                       <h4 style="margin:0px;font-size:14px;">My Favourite:</h4>
++                       <select multiple class="myselect">
++                        <option>Donald</option>
++                        <option selected>Mickey</option>
++                        <option>Goofy</option>
++                       </select>
++                      </div>
++                      <div style="width:250px;float:left;">
++                       <h4 style="font-size:14px;margin-top:0px;">Upload image:</h4>
++                       <input type="file" />
++                      </div>
++                      <input type="image" src="arrow-r.jpg" style="float:right;border:3px solid transparent" />
++                      <div style="clear:both"></div>
++                     </div>
++                    -->
++                </form>
++            </div>
++            <br>
++        </div>
++    </div>
++</div>
++</body>
++</html>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1688293947552)
++++ b/.idea/misc.xml	(date 1688293947552)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="corretto-11" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/test/java/BasicLocatorsTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/BasicLocatorsTest.java b/src/test/java/BasicLocatorsTest.java
+new file mode 100644
+--- /dev/null	(date 1689273749113)
++++ b/src/test/java/BasicLocatorsTest.java	(date 1689273749113)
+@@ -0,0 +1,56 @@
++import factory.BrowserFactory;
++import org.openqa.selenium.Keys;
++import org.openqa.selenium.By;
++import org.openqa.selenium.WebDriver;
++import org.testng.annotations.AfterMethod;
++import org.testng.annotations.BeforeMethod;
++import org.testng.annotations.Test;
++import utils.configuration.ReadProperties;
++import org.openqa.selenium.support.ui.Select;
++import org.testng.Assert;
++import java.util.List;
++public class BasicLocatorsTest {
++    protected WebDriver driver;
++
++    @BeforeMethod
++    public void setUp() {
++        BrowserFactory browserFactory = new BrowserFactory();
++        driver = browserFactory.getDriver();
++    }
++
++    @AfterMethod
++    public void tearDown() {
++        driver.quit();
++    }
++
++    @Test
++    public void basicLocatorsTest_1() {
++        driver.get(ReadProperties.getUrl());
++
++        // Find webElement by ID
++        driver.findElement(By.id("name")).sendKeys(ReadProperties.username());
++
++        // Find webElement by Name
++        driver.findElement(By.name("password")).sendKeys(ReadProperties.password());
++
++        // Find webElement by Tag
++        driver.findElement(By.tagName("button")).click();
++    }
++
++    @Test
++    public void basicLocatorsTest_2() {
++        driver.get(ReadProperties.getUrl());
++
++        // Find webElement by LinkText
++        driver.findElement(By.linkText("Forgot your password?")).click();
++
++        // Find webElement by ClassName
++        driver.findElement(By.className("forgot_passwordpage-request-cancel")).click();
++
++        // Find webElement by PartialLinkText
++        driver.findElement(By.partialLinkText("your password?")).click();
++    }
++
++
++}
++
