@@ -65,7 +65,6 @@ public class XpathLocatorsTest {   //https://www.saucedemo.com/
         // Поиск элемента по индексу
         Assert.assertTrue(driver.findElement(By.xpath("//div[2]")).isDisplayed());
     }
-
     @Test
     public void axesXPathTest() {
         driver.get("https://www.saucedemo.com/inventory.html");

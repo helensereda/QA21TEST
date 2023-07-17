@@ -15,7 +15,6 @@ public class CssSelectorsTest {
         BrowserFactory browserFactory = new BrowserFactory();
         driver = browserFactory.getDriver();
     }
-
     @AfterMethod
     public void tearDown() {
         driver.quit();

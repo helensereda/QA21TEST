@@ -11,7 +11,6 @@ import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 public class BasicLocatorsTest {      //https://www.saucedemo.com/
     protected WebDriver driver;
 
