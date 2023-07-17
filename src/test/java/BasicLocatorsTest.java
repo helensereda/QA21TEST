@@ -26,7 +26,6 @@ public class BasicLocatorsTest {      //https://www.saucedemo.com/
         driver.quit();
     }
 
-
     @Test
     public void basicLocatorsTest_1() {
         driver.get(ReadProperties.getUrl());
