@@ -16,14 +16,14 @@ public class BrowserFactory {
         switch (ReadProperties.browserName().toLowerCase()) {
             case "chrome" :
                 driverManagerType = DriverManagerType.CHROME;
-                WebDriverManager.getInstance(driverManagerType).setup();
+//                WebDriverManager.getInstance(driverManagerType).setup();
 
                 driver = new ChromeDriver(getChromeOptions());
                 break;
             case "firefox":
                 driverManagerType = DriverManagerType.FIREFOX;
                 WebDriverManager.getInstance(driverManagerType).setup();
-
+ WebDriverManager.chromedriver().driverVersion("114.0.5735.199");
                 driver = new FirefoxDriver(getFirefoxOptions());
                 break;
             default:
