@@ -6,6 +6,7 @@ import pages.CheckOutPage;
 
   public class AddInfoStep extends BaseStep_hw {
 
+
     public AddInfoStep(WebDriver driver) {
         super(driver);
     }

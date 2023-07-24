@@ -4,7 +4,6 @@ import baseEntities.BasePage_hw;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 public class CheckOutCompletePage extends BasePage_hw{
     private final static String pagePath = "/checkout-complete.html";
 

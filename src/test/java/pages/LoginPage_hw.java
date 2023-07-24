@@ -5,7 +5,6 @@ import baseEntities.BasePage_hw;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 public class LoginPage_hw extends BasePage_hw {
 
     // блок описания локаторов для элементов

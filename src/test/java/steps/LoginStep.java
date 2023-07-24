@@ -4,7 +4,6 @@ package steps;
 import baseEntities.BaseStep_hw;
 import org.openqa.selenium.WebDriver;
 import pages.ProductsPage;
-
   public class LoginStep extends BaseStep_hw {
 
     public LoginStep(WebDriver driver) {

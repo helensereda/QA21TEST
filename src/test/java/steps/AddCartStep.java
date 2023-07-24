@@ -10,6 +10,7 @@ import pages.ProductsPage;
         super(driver);
     }
 
+
       public ProductsPage successAddCart() {
           productsPage.addToCart();
           return productsPage;

@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.configuration.ReadProperties;
 public class EndToEndTest_hw extends BaseTest_hw {
+
     @Test
     public void successLoginTest() throws InterruptedException {
 

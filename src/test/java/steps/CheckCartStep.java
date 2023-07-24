@@ -13,5 +13,6 @@ import pages.YourCartPage;
       public YourCartPage successCheckCart() {
           yourCartPage.checkCart();
           return yourCartPage;
+
       }
 }

@@ -5,7 +5,6 @@ import baseEntities.BasePage_hw;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 public class YourCartPage extends BasePage_hw {
     private final static String pagePath = "cart.html";
 //     блок описания локаторов для элементов

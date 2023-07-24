@@ -1,5 +1,4 @@
 package pages;
-
 import baseEntities.BasePage_hw;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
