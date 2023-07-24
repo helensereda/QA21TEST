@@ -2,7 +2,6 @@ package baseEntities; //
 
 import org.openqa.selenium.WebDriver;
 import pages.*;
-
 public class BaseStep_hw {
     protected WebDriver driver;
     protected LoginPage_hw loginPage;

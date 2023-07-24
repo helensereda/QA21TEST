@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import pages.*;
 import steps.*;
 import utils.configuration.ReadProperties;
-
 public class BaseTest_hw {
 
     protected WebDriver driver;
