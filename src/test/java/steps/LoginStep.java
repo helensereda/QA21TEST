@@ -1,25 +1,18 @@
+  //  для связывания страниц и тестов
 package steps;
 
-import baseEntities.BaseStep;
+import baseEntities.BaseStep_hw;
 import org.openqa.selenium.WebDriver;
-import pages.DashboardPage;
-import pages.LoginPage;
+import pages.ProductsPage;
 
-public class LoginStep extends BaseStep {
+  public class LoginStep extends BaseStep_hw {
 
     public LoginStep(WebDriver driver) {
         super(driver);
     }
 
-    public DashboardPage successLogin(String username, String psw) {
-        loginPage.login(username, psw);
-
-        return dashboardPage;
-    }
-
-    public LoginPage negativeLogin(String username, String psw) {
-        loginPage.login(username, psw);
-
-        return loginPage;
+    public ProductsPage successLogin(String username, String psw) {
+        loginPage.successLogin(username,psw);
+        return productsPage;
     }
 }

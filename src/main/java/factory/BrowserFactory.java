@@ -22,7 +22,7 @@ public class BrowserFactory {
                 break;
             case "firefox":
                 driverManagerType = DriverManagerType.FIREFOX;
-                WebDriverManager.getInstance(driverManagerType).setup();
+//                WebDriverManager.getInstance(driverManagerType).setup();
  WebDriverManager.chromedriver().driverVersion("114.0.5735.199");
                 driver = new FirefoxDriver(getFirefoxOptions());
                 break;
