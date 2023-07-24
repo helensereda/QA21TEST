@@ -1,3 +1,4 @@
+
 1.Зайти на сайт https://www.saucedemo.com
 2.Авторизоваться как standard_user / secret_sauce
 3.На странице "Products" выбрать товар, нажать на кнопку "Add to cart"
