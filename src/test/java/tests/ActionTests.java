@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import services.WaitService;
 
+import java.io.File;
 import java.util.List;
 
 public class ActionTests extends BaseTest {
@@ -36,11 +37,12 @@ public class ActionTests extends BaseTest {
 
         WaitService waitService = new WaitService(driver);
 
-        WebElement fileUploadElement = waitService.waitForExists(By.xpath("//form/input[@type='file']"));
-       String pathToFile = "C:/Users/elena.sereda/IdeaProjects/QA21TEST/src/test/resources/download.jpeg";
-//        String pathToFile = ActionTests.class.getClassLoader().getResource("download.jpeg").getPath();
+        WebElement fileUploadElement = waitService.waitForExists(By.id("file-upload"));
+//       String pathToFile = "C:/Users/elena.sereda/IdeaProjects/QA21TEST/src/test/resources/download.jpeg";
+        String pathToFile = ActionTests.class.getClassLoader().getResource("download.jpeg").getPath();
+        File file = new File ("src/test/resources/download.jpeg");
         System.out.println(pathToFile);
-        fileUploadElement.sendKeys(pathToFile);
+        fileUploadElement.sendKeys(file.getAbsolutePath());
 
         waitService.waitForVisibilityLocatedBy(By.id("file-submit")).submit();
 
