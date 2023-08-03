@@ -41,21 +41,11 @@ public class SmokeTest_Homework {
         Select SelectHeating = new Select(selectWebElement1);
         SelectHeating.selectByValue("2");
         Thread.sleep(2000);
-
         lostInput.sendKeys("0");
-
-
         calcButton.click();
-
-
-        WebElement result = driver.findElement(By.id ("floor_cable_power"));
-        WebElement result1 = driver.findElement(By.id ("spec_floor_cable_power"));
-
-
         Assert.assertTrue(driver.findElement(By.id("floor_cable_power")).getAttribute("value").equals("28800"), "Верное значение");
         Assert.assertTrue(driver.findElement(By.id("spec_floor_cable_power")).getAttribute("value").equals("120"), "Верное значение");
     }
-
 
     @AfterMethod
     public void tearDown() {
