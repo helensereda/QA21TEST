@@ -20,7 +20,7 @@ public class DynamicControlsTest extends BaseTest {
         WebElement buttonCheckbox  = waitService.waitForExists(By.id("checkbox"));
         buttonCheckbox.isDisplayed();
 
-        WebElement buttonRemove  = waitService.waitForExists(By.xpath("//*[@id=\"checkbox-example\"]/button"));
+        WebElement buttonRemove  = waitService.waitForExists(By.cssSelector("#checkbox-example button"));
         buttonRemove.click();
 
         WebElement messageLocator  = waitService.waitForExists(By.id("message"));

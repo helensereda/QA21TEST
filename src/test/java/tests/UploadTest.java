@@ -19,12 +19,9 @@ public class UploadTest extends BaseTest {
         UploadPage uploadPage = new UploadPage(driver);
         uploadPage.openPageByUrl();
 
-        String pathToFile = "C:/Users/elena.sereda/IdeaProjects/QA21TEST/src/test/resources/picture.webp";
-//        String pathToFile = UploadTest.class.getClassLoader().getResource("picture.webp").getPath(); не получилось
-//        File file = new File ("src/test/resources/picture.webp");
-//        System.out.println(pathToFile);
-
-        uploadPage.getButtonUpload().sendKeys(pathToFile);
+        WebElement fileUploadElement = waitService.waitForExists(By.id("file-upload"));
+        String pathToFile = UploadTest.class.getClassLoader().getResource("picture.webp").getPath();
+        fileUploadElement.sendKeys(pathToFile.substring(1,pathToFile.length()));
         uploadPage.getButtonSubmit().click();
         Assert.assertEquals("picture.webp",uploadPage.getLabelUploaded().getText());
 
