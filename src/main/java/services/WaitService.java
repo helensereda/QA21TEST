@@ -1,5 +1,6 @@
 package services;
 
+import factory.BrowserSingleton;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,22 +18,22 @@ public class WaitService {
     private WebDriverWait wait;
     private WebDriver driver;
 
-    public WaitService(WebDriver driver, Duration timeout) {
-        this.driver = driver;
+    public WaitService(Duration timeout) {
+        this.driver = BrowserSingleton.getInstance().driver;;
         this.wait = new WebDriverWait(driver, timeout);
     }
 
-    public WaitService(WebDriver driver) {
-        this.driver = driver;
+    public WaitService() {
+        this.driver = BrowserSingleton.getInstance().driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(ReadProperties.timeout()));
     }
 
     public WebElement waitForExists(By locator) {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));  //ищем эл.в дом модели
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     public WebElement waitForVisibility(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element)); // работает с вэб. элементом, чтобы проверить это его надл найти
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public WebElement waitForVisibilityLocatedBy(By locator) {
@@ -40,7 +41,7 @@ public class WaitService {
     }
 
     public List<WebElement> waitForAllVisibleElementsLocatedBy(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator)); // находя\тся все элементы и если какой то эл.есть в дом.модели , но на стр.он не отображается, ждем когда отобразится и сравниваем с результатом
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     public Boolean waitForElementInvisible(WebElement element) {
@@ -53,6 +54,6 @@ public class WaitService {
                 .pollingEvery(Duration.ofMillis(50))
                 .ignoring(NoSuchElementException.class);
 
-        return fluent.until(driverItem -> driverItem.findElement(locator)); // через кажные 50 мил.се будет выполняться поиск локатора, если не нашел ноусачэкс(проигнорировал),нашел- все ок, если прошло 30 сек, то таймаут
+        return fluent.until(driverItem -> driverItem.findElement(locator));
     }
 }
