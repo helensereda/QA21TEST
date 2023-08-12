@@ -31,10 +31,20 @@ public class ReadProperties {
         return properties.getProperty("password");
     }
 
-    public static int timeout() {
-        return Integer.parseInt(properties.getProperty("timeout"));
+    public static String firstname() {
+        return properties.getProperty("firstname");
+    }
+    public static String lastname() {
+        return properties.getProperty("lastname");
+    }
+    public static String code() {
+        return properties.getProperty("code");
     }
     public static boolean isHeadless() {
         return properties.getProperty("headless").equalsIgnoreCase("true");
+    }
+
+    public static long timeout() {
+        return 0;
     }
 }
