@@ -10,9 +10,11 @@ import pages.LoginPage_hw;
 import utils.configuration.ReadProperties;
 public class EndToEndTest_hw extends BaseTest_hw {
 
+
     @Test
     public void successTest()  {
         new LoginPage_hw(driver)
+
 
                 .login_hw(ReadProperties.username(),ReadProperties.password())
                 .addToCart()
