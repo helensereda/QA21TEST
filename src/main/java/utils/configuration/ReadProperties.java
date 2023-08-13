@@ -48,10 +48,12 @@ public class ReadProperties {
         return 0;
     }
 
-    public static String standartUserName () {
-        return properties.getProperty("standartUserName");
+//    public static String standartUserName () {
+//        return properties.getProperty("standartUserName");
+//    }
+    public static String userName () {
+        return properties.getProperty("userName");
     }
-
     public static String failUserName () {
         return properties.getProperty("failUserName");
     }

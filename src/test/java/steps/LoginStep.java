@@ -12,7 +12,7 @@ import pages.ProductsPage;
     }
 
       public ProductsPage successLogin(User user) {
-          loginPage.successLogin(user);
+          loginPage.login(user);
           return productsPage;
 
 
