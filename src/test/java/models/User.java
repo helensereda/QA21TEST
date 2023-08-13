@@ -3,9 +3,9 @@ package models;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class User {
     @EqualsAndHashCode.Exclude
     private int id;
