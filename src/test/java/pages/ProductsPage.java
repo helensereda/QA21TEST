@@ -10,7 +10,7 @@ private final static String pagePath = "/inventory.html";
         //https://www.saucedemo.com/inventory.html
     // блок описания локаторов для элементов
     private final By headerTitleLocator = By.xpath("//div[text() = 'Swag Labs']");
-    private final By addToCartButtonLocator= By.id("add-to-cart-test.allthethings()-t-shirt-(red)");
+    private final By addToCartButtonLocator= By.id("add-to-cart-sauce-labs-bike-light");
     private final By shoppingCartLocator = By.id("shopping_cart_container");
 
     //блок инициализации
@@ -30,19 +30,14 @@ private final static String pagePath = "/inventory.html";
     public WebElement getHeaderTitleInput() {
         return driver.findElement(headerTitleLocator);
     }
-
-    public WebElement getAddToCardInput() {
+    public WebElement getAddToCard() {
         return driver.findElement(addToCartButtonLocator);
     }
 
-    public WebElement getShoppingCartInput() {
+    public WebElement getShoppingCart() {
         return driver.findElement(shoppingCartLocator);
     }
 
     // Блок комплексных методов
-    public void addToCart() {
-        getAddToCardInput().click();
-        getShoppingCartInput().click();
-    }
 
 }

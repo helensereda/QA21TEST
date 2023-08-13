@@ -43,4 +43,20 @@ public class ReadProperties {
     public static boolean isHeadless() {
         return properties.getProperty("headless").equalsIgnoreCase("true");
     }
+
+    public static long timeout() {
+        return 0;
+    }
+
+    public static String standartUserName () {
+        return properties.getProperty("standartUserName");
+    }
+
+    public static String failUserName () {
+        return properties.getProperty("failUserName");
+    }
+
+    public static String originalPassword () {
+        return properties.getProperty("originalPassword");
+    }
 }

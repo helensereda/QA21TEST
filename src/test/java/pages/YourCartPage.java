@@ -26,18 +26,11 @@ public class YourCartPage extends BasePage_hw {
     }
 
 //    Блок атомарных методов
-    public WebElement getHeaderCartTitleInput() {
-        return driver.findElement(headerCartTitleLocator);
-    }
 
-    public WebElement getCheckoutButtonInput() {
+    public WebElement getCheckoutButton() {
         return driver.findElement(checkoutButtonLocator);
     }
 
     // Блок комплексных методов
-    public void checkCart() {
-        getCheckoutButtonInput().click();
-    }
-
 }
 

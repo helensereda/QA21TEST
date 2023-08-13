@@ -32,7 +32,4 @@ public class CheckOutOverPage extends BasePage_hw {
     }
     // Блок комплексных методов
 
-    public void getPayment() {
-        getFinishButton().click();
-    }
 }

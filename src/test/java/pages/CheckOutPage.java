@@ -1,5 +1,7 @@
 package pages;
 import baseEntities.BasePage_hw;
+import models.InfoUser;
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,11 +54,9 @@ public class CheckOutPage extends BasePage_hw {
 
     // Блок комплексных методов
 
-    public void getInfo(String firstname, String lastname, String code ) {
-        setFirstName("Firstname");
-        setLastName("Lastname");
-        setCode("code");
-        getCheckButtonInput().click();
+    public void getInfo(InfoUser infoUser) {
+        setFirstName(infoUser.getFirstName());
+        setLastName(infoUser.getLastName());
+        setCode(infoUser.getCode());
     }
-
 }

@@ -2,6 +2,7 @@
 package steps;
 import baseEntities.BaseStep_hw;
 import org.openqa.selenium.WebDriver;
+import pages.CheckOutCompletePage;
 import pages.CheckOutOverPage;
 import pages.YourCartPage;
 
@@ -10,8 +11,8 @@ import pages.YourCartPage;
         super(driver);
     }
 
-      public CheckOutOverPage successFinish() {
-          checkOutOverPage.getPayment();
-          return checkOutOverPage;
+      public CheckOutCompletePage  successFinish() {
+          checkOutOverPage.getFinishButton().click();
+          return checkOutCompletePage;
       }
 }

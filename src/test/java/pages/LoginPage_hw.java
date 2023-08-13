@@ -2,6 +2,7 @@ package pages;
 
 import baseEntities.BasePage_hw;
 import baseEntities.BasePage_hw;
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,9 +37,10 @@ public class LoginPage_hw extends BasePage_hw {
     }
 
     // Блок комплексных методов
-    public void successLogin(String username, String password) {
-        getUsernameInput().sendKeys(username);
-        getPasswordInput().sendKeys(password);
+    public void successLogin(User user) {
+        getUsernameInput().sendKeys(user.getUserName());
+        getPasswordInput().sendKeys(user.getPassword());
         getloginButton().click();
     }
+
 }
