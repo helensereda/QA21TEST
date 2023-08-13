@@ -1,9 +1,14 @@
 package pages;
 
 import baseEntities.BasePage;
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
@@ -26,11 +31,15 @@ public class LoginPage extends BasePage {
 
     // Блок атомарных методов
     public WebElement getEmailInput() {
-        return driver.findElement(emailInputLocator);
+        return waitService.waitForExists(emailInputLocator);
     }
 
     public WebElement getPswInput() {
-        return driver.findElement(pswInputLocator);
+        return waitService.waitForExists(pswInputLocator);
+    }
+
+    public boolean isPswInputDisplayed() {
+        return waitService.waitForVisibility(getPswInput()).isDisplayed();
     }
 
     public WebElement getLogInButton() {
@@ -50,9 +59,9 @@ public class LoginPage extends BasePage {
     }
 
     // Блок комплексных методов
-    public void login(String username, String psw) {
-        setEmail(username);
-        getPswInput().sendKeys(psw);
+    public void login(User user) {
+        setEmail(user.getEmail());
+        getPswInput().sendKeys(user.getPassword());
         getLogInButton().click();
     }
 
