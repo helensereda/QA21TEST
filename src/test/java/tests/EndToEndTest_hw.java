@@ -12,7 +12,7 @@ public class EndToEndTest_hw extends BaseTest_hw {
 
     @Test
     public void successTest(){
-        loginStep.successLogin(DataHelper.failUserName()).isPageOpened();
+        loginStep.successLogin(DataHelper.getStandartUser()).isPageOpened();
         addCartStep.addToCard().isPageOpened();
         addCartStep.openCart().isPageOpened();
         checkCartStep.checkOut().isPageOpened();
@@ -21,6 +21,5 @@ public class EndToEndTest_hw extends BaseTest_hw {
         Assert.assertTrue(finishStep.successFinish().isPageOpened());
     }
 }
-
 
 
