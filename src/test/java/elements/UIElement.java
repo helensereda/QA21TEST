@@ -26,7 +26,6 @@ public class UIElement implements WebElement {
         this.waitService = new WaitService(driver);
     }
 
-
     @Override
     public void click() {
         try {
@@ -83,6 +82,10 @@ public class UIElement implements WebElement {
         return webElement.findElements(by);
     }
 
+    public UIElement findUIElement(By by) {
+        return new UIElement(driver, webElement.findElement(by));
+    }
+
     public List<UIElement> findUIElements(By by) {
         ArrayList<UIElement> list = new ArrayList<>();
         for (WebElement element : webElement.findElements(by)) {
@@ -130,4 +133,7 @@ public class UIElement implements WebElement {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", webElement);
     }
 
+    public WebElement getWebElement() {
+        return webElement;
+    }
 }

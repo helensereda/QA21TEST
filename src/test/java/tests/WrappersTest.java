@@ -2,6 +2,7 @@ package tests;
 
 import baseEntities.BaseTest;
 import elements.TableCell;
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;

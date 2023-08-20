@@ -1,9 +1,7 @@
 package pages;
 
 import baseEntities.BasePage;
-import elements.Button;
-import elements.Input;
-import elements.UIElement;
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,20 +30,20 @@ public class LoginPage extends BasePage {
     }
 
     // Блок атомарных методов
-    public Input getEmailInput() {
-        return new Input(driver, emailInputLocator);
+    public WebElement getEmailInput() {
+        return waitService.waitForExists(emailInputLocator);
     }
 
-    public Input getPswInput() {
-        return new Input(driver, pswInputLocator);
+    public WebElement getPswInput() {
+        return waitService.waitForExists(pswInputLocator);
     }
 
     public boolean isPswInputDisplayed() {
-        return getPswInput().isDisplayed();
+        return waitService.waitForVisibility(getPswInput()).isDisplayed();
     }
 
-    public Button getLogInButton() {
-        return new Button(driver, logInButtonLocator);
+    public WebElement getLogInButton() {
+        return driver.findElement(logInButtonLocator);
     }
 
     public void setEmail(String value) {
@@ -61,9 +59,9 @@ public class LoginPage extends BasePage {
     }
 
     // Блок комплексных методов
-    public void login(String username, String psw) {
+    public void login(String username, String password) {
         setEmail(username);
-        getPswInput().sendKeys(psw);
+        getPswInput().sendKeys(password);
         getLogInButton().click();
     }
 
