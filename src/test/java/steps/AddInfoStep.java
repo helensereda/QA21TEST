@@ -7,8 +7,8 @@ import pages.CheckOutPage;
   public class AddInfoStep extends BaseStep_hw {
 
 
-    public AddInfoStep(WebDriver driver) {
-        super(driver);
+    public AddInfoStep() {
+        super();
     }
 
       public CheckOutPage successInfo(String firstname, String lastname, String code) {

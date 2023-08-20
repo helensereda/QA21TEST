@@ -6,8 +6,8 @@ import pages.CheckOutOverPage;
 import pages.YourCartPage;
 
   public class FinishStep extends BaseStep_hw {
-    public FinishStep(WebDriver driver) {
-        super(driver);
+    public FinishStep() {
+        super();
     }
 
       public CheckOutOverPage successFinish() {

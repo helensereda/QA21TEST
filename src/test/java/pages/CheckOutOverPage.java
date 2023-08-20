@@ -1,8 +1,12 @@
 package pages;
 import baseEntities.BasePage_hw;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static com.codeborne.selenide.Selenide.$;
+
 public class CheckOutOverPage extends BasePage_hw {
     private final static String pagePath = "/checkout-step-two.html";
 
@@ -11,8 +15,8 @@ public class CheckOutOverPage extends BasePage_hw {
     private final By finishButtonLocator = By.id("finish");
 
     //блок инициализации
-    public CheckOutOverPage(WebDriver driver) {
-        super(driver);
+    public CheckOutOverPage() {
+        super();
     }
     public void openPageByUrl () {
         super.openPageByUrl(pagePath);
@@ -23,12 +27,12 @@ public class CheckOutOverPage extends BasePage_hw {
     }
     //Блок атомарных методов
 
-    public WebElement getCheckOutOverNew() {
-        return driver.findElement(checkOutOverNewLocator);
+    public SelenideElement getCheckOutOverNew() {
+        return $(checkOutOverNewLocator);
     }
 
-    public WebElement getFinishButton() {
-        return driver.findElement(finishButtonLocator);
+    public SelenideElement getFinishButton() {
+        return $(finishButtonLocator);
     }
     // Блок комплексных методов
 

@@ -1,8 +1,12 @@
 package pages;
 import baseEntities.BasePage_hw;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static com.codeborne.selenide.Selenide.$;
+
 public class CheckOutPage extends BasePage_hw {
     private final static String pagePath = "/checkout-step-one.html";
 
@@ -13,8 +17,8 @@ public class CheckOutPage extends BasePage_hw {
     private final By codeInputLocator = By.id("postal-code");
     private final By checkButtonLocator = By.id("continue");
     //блок инициализации
-    public CheckOutPage(WebDriver driver) {
-        super(driver);
+    public CheckOutPage() {
+        super();
     }
     public void openPageByUrl () {
         super.openPageByUrl(pagePath);
@@ -24,20 +28,20 @@ public class CheckOutPage extends BasePage_hw {
         return headerLocator;
     }
     //Блок атомарных методов
-    public WebElement getFirstNameInput() {
-        return driver.findElement(firstNameInputLocator);
+    public SelenideElement getFirstNameInput() {
+        return $(firstNameInputLocator);
     }
 
-    public WebElement getLastNameInput() {
-        return driver.findElement(lastNameInputLocator);
+    public SelenideElement getLastNameInput() {
+        return $(lastNameInputLocator);
     }
 
-    public WebElement getCodeInput() {
-        return driver.findElement(codeInputLocator);
+    public SelenideElement getCodeInput() {
+        return $(codeInputLocator);
     }
 
-    public WebElement getCheckButtonInput() {
-        return driver.findElement(checkButtonLocator);
+    public SelenideElement getCheckButtonInput() {
+        return $(checkButtonLocator);
     }
 
     public void setFirstName(String value) {

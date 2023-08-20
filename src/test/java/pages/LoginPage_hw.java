@@ -2,9 +2,13 @@ package pages;
 
 import baseEntities.BasePage_hw;
 import baseEntities.BasePage_hw;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static com.codeborne.selenide.Selenide.$;
+
 public class LoginPage_hw extends BasePage_hw {
 
     // блок описания локаторов для элементов
@@ -13,8 +17,8 @@ public class LoginPage_hw extends BasePage_hw {
     private final By loginButtonLocator = By.id("login-button");
 
     //блок инициализации
-    public LoginPage_hw(WebDriver driver) {
-        super(driver);
+    public LoginPage_hw() {
+        super();
     }
 
     @Override
@@ -24,15 +28,15 @@ public class LoginPage_hw extends BasePage_hw {
 
     //Блок атомарных методов
 
-    public WebElement getUsernameInput() {
-        return driver.findElement(usernameInputLocator);
+    public SelenideElement getUsernameInput() {
+        return $(usernameInputLocator);
     }
 
-    public WebElement getPasswordInput() {
-        return driver.findElement(passwordInputLocator);
+    public SelenideElement getPasswordInput() {
+        return $(passwordInputLocator);
     }
-    public WebElement getloginButton() {
-        return driver.findElement(loginButtonLocator);
+    public SelenideElement getloginButton() {
+        return $(loginButtonLocator);
     }
 
     // Блок комплексных методов

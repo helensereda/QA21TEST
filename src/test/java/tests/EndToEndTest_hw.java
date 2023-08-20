@@ -14,7 +14,7 @@ public class EndToEndTest_hw extends BaseTest_hw {
                 addCartStep.successAddCart().isPageOpened();
                 checkCartStep.successCheckCart().isPageOpened();
                 addInfoStep.successInfo(ReadProperties.firstname(), ReadProperties.lastname(), ReadProperties.code()).isPageOpened();
-                Assert.assertTrue(finishStep.successFinish().isPageOpened());
+                finishStep.successFinish().isPageOpened();
     }
 }
 

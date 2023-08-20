@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import pages.YourCartPage;
   public class CheckCartStep extends BaseStep_hw {
 
-    public CheckCartStep(WebDriver driver) {
-        super(driver);
+    public CheckCartStep() {
+        super();
     }
 
       public YourCartPage successCheckCart() {
