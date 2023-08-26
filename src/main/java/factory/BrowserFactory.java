@@ -2,21 +2,31 @@ package factory;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.Browser;
 import utils.configuration.ReadProperties;
+
+import java.time.Duration;
+
 public class BrowserFactory {
+    Logger logger = LogManager.getLogger(BrowserFactory.class);
+
     private WebDriver driver = null;
     private DriverManagerType driverManagerType = null;
 
     public BrowserFactory() {
+
         switch (ReadProperties.browserName().toLowerCase()) {
             case "chrome" :
                 driverManagerType = DriverManagerType.CHROME;
-                WebDriverManager.getInstance(driverManagerType).setup();
+                WebDriverManager.getInstance(driverManagerType).clearDriverCache().setup();
+                //WebDriverManager.chromedriver().driverVersion("114.0.5735.90").setup();
 
                 driver = new ChromeDriver(getChromeOptions());
                 break;
@@ -27,7 +37,7 @@ public class BrowserFactory {
                 driver = new FirefoxDriver(getFirefoxOptions());
                 break;
             default:
-                System.out.println("Browser " + ReadProperties.browserName() + " is not supported.");
+                logger.error("Browser " + ReadProperties.browserName() + " is not supported.");
                 break;
         }
     }
@@ -35,6 +45,7 @@ public class BrowserFactory {
     public WebDriver getDriver() {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 
         return this.driver;
     }
@@ -48,6 +59,7 @@ public class BrowserFactory {
         chromeOptions.addArguments("--silent");
         chromeOptions.addArguments("--start-maximized");
         chromeOptions.addArguments("--incognito");
+        //chromeOptions.addArguments("--headless=new");
 
         return chromeOptions;
     }

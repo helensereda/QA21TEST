@@ -2,6 +2,7 @@ package baseEntities;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.devtools.v112.audits.model.AffectedRequest;
 import services.WaitService;
 import utils.configuration.ReadProperties;
 
@@ -13,7 +14,6 @@ public abstract class BasePage {
         this.driver = driver;
         this.waitService = new WaitService(driver);
     }
-
 
     public void openPageByUrl(String pagePath) {
         driver.get(ReadProperties.getUrl() + pagePath);
