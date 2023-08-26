@@ -1,16 +1,16 @@
 package stepDefs;
 
-import baseEntities.BaseTest;
+import baseEntities.BaseTest_hw;
 import factory.BrowserFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.qameta.allure.Step;
 
-public class Hook extends BaseTest {
-    private BaseTest baseTest;
+public class Hook extends BaseTest_hw {
+    private BaseTest_hw baseTest;
 
-    public Hook(BaseTest baseTest) {
+    public Hook(BaseTest_hw baseTest) {
         this.baseTest = baseTest;
     }
 

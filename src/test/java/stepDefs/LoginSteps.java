@@ -1,19 +1,19 @@
 package stepDefs;
 
-import baseEntities.BaseTest;
+import baseEntities.BaseTest_hw;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pages.DashboardPage;
-import pages.LoginPage;
+import pages.LoginPage_hw;
+import pages.ProductsPage;
 import utils.configuration.ReadProperties;
 
-public class LoginSteps extends BaseTest {
-    private BaseTest baseTest;
-    private LoginPage loginPage;
+public class LoginSteps extends BaseTest_hw {
+    private BaseTest_hw baseTest;
+    private LoginPage_hw loginPage;
 
-    public LoginSteps(BaseTest baseTest) {
+    public LoginSteps(BaseTest_hw baseTest) {
         this.baseTest = baseTest;
     }
 
@@ -29,18 +29,14 @@ public class LoginSteps extends BaseTest {
 
     @When("user enter username {} and password {}")
     public void setUsernameAndPassword(String username, String password) {
-        loginPage = new LoginPage(driver);
-        loginPage.getEmailInput().sendKeys(username);
-        loginPage.getPswInput().sendKeys(password);
+        loginPage = new LoginPage_hw(driver);
+        loginPage.getUsernameInput().sendKeys(username);
+        loginPage.getPasswordInput().sendKeys(password);
+        loginPage.getloginButton().click();
     }
 
-    @When("user clicks login button")
-    public void clickLoginButton() {
-        loginPage.getLogInButton().click();
-    }
-
-    @Then("dashboard page is displayed")
-    public void isDashboardPageDisplayed() {
-        Assert.assertTrue(new DashboardPage(driver).isPageOpened());
+    @Then("products page is displayed")
+    public void isProductsPageDisplayed() {
+        Assert.assertTrue(new ProductsPage(driver).isPageOpened());
     }
 }
