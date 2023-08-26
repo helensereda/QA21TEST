@@ -21,7 +21,7 @@ public class BrowserFactory {
         switch (ReadProperties.browserName().toLowerCase()){
             case "chrome":
                 driverManagerType = DriverManagerType.CHROME;
-                WebDriverManager.chromedriver().driverVersion("116.0.5845.97").setup();
+                WebDriverManager.chromedriver().driverVersion("116.0.5845.111").setup();
 
                 driver = new ChromeDriver(getChromeOptions());
                 break;
