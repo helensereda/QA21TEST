@@ -21,7 +21,7 @@ public class BrowserFactory {
         switch (ReadProperties.browserName().toLowerCase()){
             case "chrome":
                 driverManagerType = DriverManagerType.CHROME;
-                WebDriverManager.chromedriver().driverVersion("114.0.5735.90").setup();
+                WebDriverManager.chromedriver().driverVersion("116.0.5845.97").setup();
 
                 driver = new ChromeDriver(getChromeOptions());
                 break;
@@ -47,7 +47,7 @@ public class BrowserFactory {
     public ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
 
-        chromeOptions.setHeadless(false);
+//        chromeOptions.setHeadless(false);
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--ignore-certificate-errors");
         chromeOptions.addArguments("--silent");
