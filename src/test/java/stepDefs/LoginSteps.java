@@ -32,9 +32,12 @@ public class LoginSteps extends BaseTest_hw {
         loginPage = new LoginPage_hw(driver);
         loginPage.getUsernameInput().sendKeys(username);
         loginPage.getPasswordInput().sendKeys(password);
-        loginPage.getloginButton().click();
-    }
 
+    }
+    @When("user clicks login button")
+    public void clickLoginButton(){
+        loginPage.getloginButton().click();
+        }
     @Then("products page is displayed")
     public void isProductsPageDisplayed() {
         Assert.assertTrue(new ProductsPage(driver).isPageOpened());
