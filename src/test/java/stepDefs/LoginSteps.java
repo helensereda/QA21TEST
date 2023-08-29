@@ -1,19 +1,19 @@
 package stepDefs;
 
-import baseEntities.BaseTest_hw;
+import baseEntities.BaseTest;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pages.LoginPage_hw;
+import pages.LoginPage;
 import pages.ProductsPage;
 import utils.configuration.ReadProperties;
 
-public class LoginSteps extends BaseTest_hw {
-    private BaseTest_hw baseTest;
-    private LoginPage_hw loginPage;
+public class LoginSteps extends BaseTest {
+    private BaseTest baseTest;
+    private LoginPage loginPage;
 
-    public LoginSteps(BaseTest_hw baseTest) {
+    public LoginSteps(BaseTest baseTest) {
         this.baseTest = baseTest;
     }
 
@@ -21,15 +21,14 @@ public class LoginSteps extends BaseTest_hw {
     public void startBrowser() {
 
     }
-
     @Given("open login page")
     public void openLoginPage() {
         driver.get(ReadProperties.getUrl());
+        //driver.get("https://www.saucedemo.com/");
     }
-
     @When("user enter username {} and password {}")
     public void setUsernameAndPassword(String username, String password) {
-        loginPage = new LoginPage_hw(driver);
+        loginPage = new LoginPage(driver);
         loginPage.getUsernameInput().sendKeys(username);
         loginPage.getPasswordInput().sendKeys(password);
 

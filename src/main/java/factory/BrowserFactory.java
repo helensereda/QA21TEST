@@ -16,10 +16,11 @@ public class BrowserFactory {
         switch (ReadProperties.browserName().toLowerCase()) {
             case "chrome" :
                 driverManagerType = DriverManagerType.CHROME;
-                WebDriverManager.getInstance(driverManagerType).setup();
-
+                //WebDriverManager.chromedriver().driverVersion("116.0.5845.111").setup();
+                WebDriverManager.getInstance(driverManagerType).clearDriverCache().setup();
                 driver = new ChromeDriver(getChromeOptions());
                 break;
+
             case "firefox":
                 driverManagerType = DriverManagerType.FIREFOX;
                 WebDriverManager.getInstance(driverManagerType).setup();
@@ -42,7 +43,7 @@ public class BrowserFactory {
     public ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
 
-        chromeOptions.setHeadless(false);
+        //chromeOptions.setHeadless(false);
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--ignore-certificate-errors");
         chromeOptions.addArguments("--silent");

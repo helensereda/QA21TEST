@@ -1,20 +1,19 @@
 package stepDefs;
 
-import baseEntities.BaseTest_hw;
+import baseEntities.BaseTest;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.CheckOutPage;
-import pages.ProductsPage;
 import pages.YourCartPage;
 
-import static baseEntities.BaseTest_hw.driver;
+import static baseEntities.BaseTest.driver;
 
 public class YourCartSteps {
-    private BaseTest_hw baseTest;
+    private BaseTest baseTest;
     private YourCartPage yourCartPage;
 
-    public YourCartSteps(BaseTest_hw baseTest) {
+    public YourCartSteps(BaseTest baseTest) {
         this.baseTest = baseTest;
     }
 

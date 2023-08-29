@@ -1,26 +1,27 @@
 package stepDefs;
 
-import baseEntities.BaseTest_hw;
+import baseEntities.BaseTest;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.ProductsPage;
 import pages.YourCartPage;
 
-import static baseEntities.BaseTest_hw.driver;
+import static baseEntities.BaseTest.driver;
 
 public class ProductsSteps {
-    private BaseTest_hw baseTest;
+    private BaseTest baseTest;
     private ProductsPage productsPage;
 
-    public ProductsSteps(BaseTest_hw baseTest) {
+    public ProductsSteps(BaseTest baseTest) {
         this.baseTest = baseTest;
     }
-    @When("user click add to cart")
+    @And("user click add to cart")
     public void clickAddToCartButton() {
         productsPage.getAddToCardInput().click();
     }
-    @When("user click shopping cart button")
+    @And("user click shopping cart button")
     public void clickShoppingCartButton() {
         productsPage.getShoppingCartInput().click();
     }

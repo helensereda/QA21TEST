@@ -1,20 +1,19 @@
 package stepDefs;
 
-import baseEntities.BaseTest_hw;
+import baseEntities.BaseTest;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pages.CheckOutCompletePage;
 import pages.CheckOutOverPage;
-import pages.CheckOutPage;
 
-import static baseEntities.BaseTest_hw.driver;
+import static baseEntities.BaseTest.driver;
 
 public class CheckOutOverSteps {
 
-    private BaseTest_hw baseTest;
+    private BaseTest baseTest;
     private CheckOutOverPage checkOutOverPage;
 
-    public CheckOutOverSteps(BaseTest_hw baseTest) {
+    public CheckOutOverSteps(BaseTest baseTest) {
         this.baseTest = baseTest;
     }
     @Then ("user click finish button")
