@@ -18,7 +18,8 @@ public class ProductsSteps {
         this.baseTest = baseTest;
     }
     @And("user click add to cart")
-    public void clickAddToCartButton() {
+    public void clickAddToCartButton() throws InterruptedException {
+        Thread.sleep(4000);
         productsPage.getAddToCardInput().click();
     }
     @And("user click shopping cart button")
