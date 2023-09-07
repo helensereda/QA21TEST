@@ -17,7 +17,7 @@ public class BrowserFactory {
             case "chrome" :
                 driverManagerType = DriverManagerType.CHROME;
                 //WebDriverManager.chromedriver().driverVersion("116.0.5845.111").setup();
-                WebDriverManager.getInstance(driverManagerType).clearDriverCache().setup();
+                WebDriverManager.getInstance(driverManagerType).setup();
                 driver = new ChromeDriver(getChromeOptions());
                 break;
 
