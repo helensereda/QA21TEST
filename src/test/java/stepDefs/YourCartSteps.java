@@ -9,7 +9,7 @@ import pages.YourCartPage;
 
 import static baseEntities.BaseTest.driver;
 
-public class YourCartSteps {
+public class YourCartSteps extends BaseTest  {
     private BaseTest baseTest;
     private YourCartPage yourCartPage;
 

@@ -1,3 +1,4 @@
+
 package stepDefs;
 
 import baseEntities.BaseTest;
@@ -10,7 +11,7 @@ import pages.YourCartPage;
 
 import static baseEntities.BaseTest.driver;
 
-public class ProductsSteps {
+public class ProductsSteps extends BaseTest  {
     private BaseTest baseTest;
     private ProductsPage productsPage;
 
@@ -19,8 +20,9 @@ public class ProductsSteps {
     }
     @And("user click add to cart")
     public void clickAddToCartButton() throws InterruptedException {
-        Thread.sleep(4000);
+        Thread.sleep(6000);
         productsPage.getAddToCardInput().click();
+
     }
     @And("user click shopping cart button")
     public void clickShoppingCartButton() {
@@ -31,5 +33,3 @@ public class ProductsSteps {
         Assert.assertTrue(new YourCartPage(driver).isPageOpened());
     }
 }
-
-

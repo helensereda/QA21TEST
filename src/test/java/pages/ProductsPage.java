@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 public class ProductsPage extends BasePage_hw {
-private final static String pagePath = "/inventory.html";
+    private final static String pagePath = "/inventory.html";
 
-        //https://www.saucedemo.com/inventory.html
+    //https://www.saucedemo.com/inventory.html
     // блок описания локаторов для элементов
     private final By headerTitleLocator = By.xpath("//div[text() = 'Swag Labs']");
     private final By addToCartButtonLocator= By.id("add-to-cart-test.allthethings()-t-shirt-(red)");
