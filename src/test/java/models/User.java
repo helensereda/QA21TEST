@@ -1,67 +1,41 @@
 package models;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
+import lombok.*;
 
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
-    private String username;
-    private String password;
+    private String name;
+
+    @EqualsAndHashCode.Exclude
+    private int id;
+
     private String email;
-    private String code;
+    private String password;
 
-    public User() {
-    }
+    @SerializedName(value = "is_active")
+    @JsonProperty("is_active")
+    private boolean isActive;
 
-    public String getUsername() {
-        return username;
-    }
+    @SerializedName(value = "is_admin")
+    @JsonProperty("is_admin")
+    @EqualsAndHashCode.Exclude
+    private boolean isAdmin;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @SerializedName(value = "role_id")
+    @JsonProperty("role_id")
+    private int roleId;
 
-    public String getPassword() {
-        return password;
-    }
+    private String role;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, password, email);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
+    @EqualsAndHashCode.Exclude
+    private String email_notifications;
 }

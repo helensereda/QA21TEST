@@ -1,60 +1,26 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Project {
+    @SerializedName(value = "name")
+    @JsonProperty("name")
     private String projectName;
+
+    //@Expose
     private String announcement;
+
+    @SerializedName(value = "show_announcement")
+    @JsonProperty("show_announcement")
     private boolean flag;
+
+    @SerializedName(value = "suite_mode")
+    @JsonProperty("suite_mode")
     private int projectType;
-    private Date date;
-    private Milestone milestone;
-
-    public Milestone getMilestone() {
-        return milestone;
-    }
-
-    public void setMilestone(Milestone milestone) {
-        this.milestone = milestone;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getAnnouncement() {
-        return announcement;
-    }
-
-    public void setAnnouncement(String announcement) {
-        this.announcement = announcement;
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    public int getProjectType() {
-        return projectType;
-    }
-
-    public void setProjectType(int projectType) {
-        this.projectType = projectType;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }
