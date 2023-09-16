@@ -42,7 +42,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void builderTest() {
+    public void builderTest() throws InterruptedException {
+        Thread.sleep(5000);
         Project project = new Project.Builder()
                 .withProjectName("ssdfsd")
                 .withProjectType(1)
